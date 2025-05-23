@@ -6,16 +6,15 @@ export default function Home() {
       <header className="sticky top-0 p-2 bg-white">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold">Terminal-Hub</h1>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <button className="cursor-pointer">
               <NotificationIcon Icon={Mail} count={3} color="#EF4444" />
             </button>
             <button>
-            <NotificationIcon Icon={Bell} count={3} color="#EF4444" />
+              <NotificationIcon Icon={Bell} count={3} color="#EF4444" />
             </button>
           </div>
         </div>
-        
       </header>
 
       <main className="min-h-screen">

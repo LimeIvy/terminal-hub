@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const stagewiseConfig = {
+  plugins: [],
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +34,9 @@ export default function RootLayout({
       >
         {children}
       </body>
+      {process.env.NODE_ENV === "development" && (
+        <StagewiseToolbar config={stagewiseConfig} />
+      )}
     </html>
   );
 }
