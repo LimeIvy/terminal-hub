@@ -13,7 +13,7 @@ model User {
   email    String  @unique
   name     String?
   password String?
-  role     Role    @default(USER)
+  role     Role    @default(GUEST)
 }
 
 model Todo {
@@ -25,6 +25,9 @@ model Todo {
 }
 
 enum Role {
-  USER
+  GUEST
+  MEMBER
+  PM 
+  MENTOR
   ADMIN
 }

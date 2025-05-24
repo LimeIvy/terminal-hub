@@ -23,7 +23,7 @@ async function main() {
           email: 'bob@example.com',
           name: 'Bob',
           password: await argon2.hash('bobpass456'),
-          role: Role.USER,
+          role: Role.GUEST,
         },
       }),
       prisma.user.create({
@@ -31,7 +31,7 @@ async function main() {
           email: 'charlie@example.com',
           name: 'Charlie',
           password: await argon2.hash('charliepass789'),
-          role: Role.USER,
+          role: Role.GUEST,
         },
       })
     ])
