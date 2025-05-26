@@ -36,7 +36,27 @@ async function main() {
       })
     ])
 
+    const posts = await Promise.all([
+      prisma.post.create({
+        data: {
+          text: 'Hello, world!',
+        },
+      }),
+      prisma.post.create({
+        data: {
+          text: 'Hello, Hono!',
+        },
+      }),
+      prisma.post.create({
+        data: {
+          text: 'Hello, Prisma!',
+        },
+      }),
+      
+    ])
+
     console.log(`Created ${users.length} users successfully.`)
+    console.log(`Created ${posts.length} posts successfully.`)
   } catch (error) {
     console.error('Error seeding database:', error)
     throw error
