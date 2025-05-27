@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { StagewiseToolbar } from "@stagewise/toolbar-next";
+import Header from "./components/AppHeader";
+import Sidebar from "./components/AppSidebar";
+import MobileSidebar from "./components/AppMobileSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +31,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
+        <Sidebar />
+        <MobileSidebar />
         {children}
       </body>
       {process.env.NODE_ENV === "development" && (
