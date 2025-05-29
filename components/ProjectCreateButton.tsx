@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { hono } from "@/lib/hono";
 
 type ProjectCreateButtonProps = {
   onCreated?: () => void;
@@ -41,7 +40,7 @@ const ProjectCreateButton: React.FC<ProjectCreateButtonProps> = ({ onCreated }) 
     setLoading(true);
     setError("");
     try {
-      const res = await hono.api.projects.$post({
+      const res = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
