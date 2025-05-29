@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
+import { hono } from "@/lib/hono";
 
 type ProjectCreateButtonProps = {
   onCreated?: () => void;
@@ -25,14 +26,9 @@ const ProjectCreateButton: React.FC<ProjectCreateButtonProps> = ({ onCreated }) 
         setShowForm(false);
       }
     };
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShowForm(false);
-    };
     document.addEventListener("mousedown", handleClick);
-    document.addEventListener("keydown", handleEsc);
     return () => {
       document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("keydown", handleEsc);
     };
   }, [showForm]);
 
@@ -45,7 +41,7 @@ const ProjectCreateButton: React.FC<ProjectCreateButtonProps> = ({ onCreated }) 
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/projects", {
+      const res = await hono.api.projects.$post({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
