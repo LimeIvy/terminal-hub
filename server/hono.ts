@@ -14,6 +14,6 @@ const blogApp = new OpenAPIHono()
   .openapi(getBlogsRoute, getBlogsHandler)
   .openapi(getBlogByIdRoute, getBlogByIdHandler)
   .openapi(createBlogRoute, createBlogHandler)
-const route = app.route("/blogs", blogApp);
-export type AppType = typeof route;
+app.route("/blogs", blogApp);
+export type AppType = typeof app;
 export default app;

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { StagewiseToolbar } from "@stagewise/toolbar-next";
-import Header from "./components/AppHeader";
-import Sidebar from "./components/AppSidebar";
-import MobileSidebar from "./components/AppMobileSidebar";
+import Header from "../components/AppHeader";
+import Sidebar from "../components/AppSidebar";
+import MobileSidebar from "../components/AppMobileSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

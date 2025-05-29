@@ -8,13 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum UserRole {
-  MEMBER         // 一般メンバー
-  PM             // プロジェクトマネージャー
-  MENTOR         // メンター
-  ADMIN          // 管理者
-}
-
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -29,72 +22,24 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile Profile?
 }
 
-// Profileモデル (ユーザーのアプリケーション固有情報)
-model Profile {
-  userId              String        @id // UserモデルのIDと一致させ、主キー兼外部キーとする
-  displayName         String        
-  studentNumber       Int?          // 学籍番号
-  grade               String?       // 学年 (例: "学部3年", "修士1年")
-  department          String?       // 学部・学科
-  profileImageUrl     String?       // ユーザーがアプリ内で設定するプロフィール画像のURL
-  bio                 String?       // 自己PR (Markdownも可)
-  appRole             UserRole      @default(MEMBER) // アプリケーション内での役割
-  createdAt           DateTime      @default(now())
-  updatedAt           DateTime      @updatedAt
-
-  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  skills              UserSkill[]   // プロフィールのスキル
-  interests           UserInterest[]// プロフィールの興味・関心
-  
+enum ProjectRole {
+  RECRUITING
+  IN_PROGRESS
+  COMPLETED
 }
 
-model Skill {
-  id        String      @id @default(cuid())
-  name      String      @unique // スキル名 (例: "JavaScript", "Python")
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-
-  profiles  UserSkill[] // このスキルを持つプロフィール
+model Project {
+  id String @id @default(cuid())
+  title String
+  description String
+  progress Int
+  role ProjectRole @default(RECRUITING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model UserSkill {
-  profileUserId String   // ProfileのuserIdを参照
-  skillId     String
-  assignedAt  DateTime @default(now())
-
-  profile     Profile  @relation(fields: [profileUserId], references: [userId], onDelete: Cascade)
-  skill       Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
-
-  @@id([profileUserId, skillId])
-  @@map("user_skills")
-}
-
-model Interest {
-  id        String         @id @default(cuid())
-  name      String         @unique // 興味・関心名 (例: "AIエージェント", "Web開発")
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-
-  profiles  UserInterest[] // この興味・関心を持つプロフィール
-}
-
-model UserInterest {
-  profileUserId String   // ProfileのuserIdを参照
-  interestId  String
-  rank        Int?     // 興味ランキング (1, 2, 3, null許容)
-  assignedAt  DateTime @default(now())
-
-  profile     Profile  @relation(fields: [profileUserId], references: [userId], onDelete: Cascade)
-  interest    Interest @relation(fields: [interestId], references: [id], onDelete: Cascade)
-
-  @@id([profileUserId, interestId])
-  @@map("user_interests")
-}
- 
 model Account {
   userId            String
   type              String
