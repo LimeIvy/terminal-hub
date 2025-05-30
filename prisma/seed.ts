@@ -3,22 +3,21 @@ const prisma = new PrismaClient()
 
 async function main() {
   try {
-    // Clear existing data
-    await prisma.user.deleteMany()
+    await prisma.project.deleteMany()
     console.log('Existing data cleared.')
 
-    const blogs = await Promise.all([
-      prisma.blog.create({
+    const projects = await Promise.all([
+      prisma.project.create({
         data: {
           title: "test",
-          content: "test",
-          userId: "1",
+          description: "test",
+          status: "RECRUITING",
         }
       })
       
     ])
 
-    console.log(`Created ${blogs.length} users successfully.`)
+    console.log(`Created ${projects.length} projects successfully.`)
   } catch (error) {
     console.error('Error seeding database:', error)
     throw error

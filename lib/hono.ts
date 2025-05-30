@@ -1,4 +1,5 @@
-import { AppType } from "@/server/hono";
-import { hc } from "hono/client";
+import { hc } from 'hono/client';
+import type { AppType } from '@/app/api/[[...route]]/route';
 
-export const hono = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
+// APIクライアントの作成
+export const client = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL!);
