@@ -5,11 +5,12 @@ import {
   BookOpen,
   MessageCircle,
   Users,
+  UserRound,
 } from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <div className="hidden md:flex w-64 h-full bg-white text-black flex-col fixed top-19 left-0 z-9 shadow-md">
+    <div className="hidden md:flex w-64 h-full bg-white text-black flex-col fixed top-16 left-0 z-9 shadow-md">
       <nav className="mt-5 p-4 flex flex-col gap-5">
         <a href="/projects" className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
           <FolderKanban size={20} />
@@ -34,6 +35,10 @@ export default function Sidebar() {
         <a href="/members" className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
           <Users size={20} />
           メンバー一覧
+        </a>
+        <a href="/personal-projects" className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md">
+          <UserRound size={20} />
+          個人開発紹介
         </a>
       </nav>
     </div>

@@ -8,7 +8,7 @@ export default async function Header() {
   return (
     <header className="sticky top-0 p-4 bg-white z-10 shadow-md">
       <div className="flex items-center justify-between">
-        <h1 className="ml-2 text-3xl font-bold">Terminal-Hub</h1>
+        <h1 className="ml-2 text-3xl font-bold text-black">Terminal-Hub</h1>
         <div className="flex items-center gap-2">
           {session ? (
             <div className="mr-5 flex items-center gap-3">
